@@ -1,0 +1,13 @@
+#ifndef SCENE_H
+#define SCENE_H
+
+public class scene
+{
+	private game_object[] game_objs;
+
+	public abstract void update_scne(input_engine* input);
+
+	public abstract void render_all(render_engine* renderer);
+}
+
+#endif

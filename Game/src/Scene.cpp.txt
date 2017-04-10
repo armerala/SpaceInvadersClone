@@ -1,0 +1,23 @@
+#include "Scene.h"
+
+public scene::scene()
+{
+
+}
+
+public scene::~scene()
+{
+
+}
+
+public abstract void scene::update_scene(input_engine* input)
+{
+//loop through the game objects and call update on each of them
+
+}
+
+public abstract void scene::render_all(render_engine* renderer)
+{
+//loop through the game objects and rendder them all
+
+}
