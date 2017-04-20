@@ -4,29 +4,12 @@
 #include <Adafruit_RA8875.h>
 #include <Adafruit_GFX.h>
 #include <SPI.h>
+#include "ModelEnums.h"
 
 namespace space_invaders
 {
 
-//some enums to somewhat hide direct access of library from game objects
-enum shape
-{
-	NONE,
-	TRIANGLE,
-	SQUARE,
-	CIRCLE,
-};
-enum color
-{
-	BLACK = RA8875_BLACK,
-	WHITE = RA8875_WHITE,
-	RED = RA8875_RED,
-	BLUE = RA8875_BLUE,
-	GREEN = RA8875_GREEN,
-	YELLOW = RA8875_YELLOW,
-	MAGENTA = RA8875_MAGENTA,
-	CYAN = RA8875_CYAN,
-};
+class game_object;
 
 class render_engine
 {
@@ -34,17 +17,17 @@ public:
 	render_engine();
 	~render_engine();
 
-	void render_shape(shape s, color c, int x, int y, int w, int h);
+	void render_game_object(game_object* go);
 	void reset_screen();
 	
 private:
-	//NOTE: connect SCLK to UNO Digital 13
-	//NOTE: connect MISO to UNO Digitl 12
-	//NOTE: connect MOSI to UNO Digital 11
-	const int SD_CS = 6;
-	const int RA8875_INT = 3;
-	const int RA8875_CS = 10;
-	const int RA8875_RESET = 9;
+	//NOTE: connect SCK to MEGA Digital 52
+	//NOTE: connect MISO to MEGA Digitl 50
+	//NOTE: connect MOSI to MEGA Digital 51
+	const uint8_t RA8875_INT = 22;
+	const uint8_t SD_CS = 6;
+	const uint8_t RA8875_RESET = 45;
+	const uint8_t RA8875_CS = 46;
 
 	const int PIXEL_BUF_SIZE = 20;
 

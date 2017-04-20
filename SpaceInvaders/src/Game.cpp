@@ -9,17 +9,17 @@ game::game()
 	//lvl = new level();
 	//lb = new leaderboard();
 
-	//active_scene = menu;
-
+	active_scene = (scene*)new level();
 	renderer = new render_engine();
 }
 
 void game::update()
 {
-	if (active_scene != NULL)
+	if (active_scene !=NULL)
 	{
+		renderer->reset_screen();
 		//active_scene->update_scene(&input);
-		active_scene->render_all(renderer);	
+		//active_scene->render_all(renderer);	
 	}
 }
 

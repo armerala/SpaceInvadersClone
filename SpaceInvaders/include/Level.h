@@ -2,6 +2,7 @@
 #define LEVEL_H
 
 #include "Scene.h"
+#include "Ship.h"
 
 namespace space_invaders
 {

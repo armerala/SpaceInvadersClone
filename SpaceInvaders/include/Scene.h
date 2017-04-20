@@ -2,10 +2,12 @@
 #define SCENE_H
 
 #include "RenderEngine.h"
-#include "GameObject.h"
+#include "GOInstantiator.h"
 
 namespace space_invaders
 {
+
+class game_object;
 
 
 class scene
@@ -13,17 +15,17 @@ class scene
 public:
 	//void update_scene(input_engine* input);
 
-	void on_notify(game_object_event e);
 	void render_all(render_engine* renderer);
+	void add_game_object(instantiable i);
+	void delete_game_object(uint8_t id);
 
 protected:
-	const int MAX_GAME_OBJS = 50;
-	game_object* game_objs[];//dangerous memory handle here, don't fuck up
-	uint8_t slots[];
-	int next_obj_id;
-
-	void add_game_object(game_object* go);
-	void delete_game_object(uint8_t id);
+	//keep a dynamic array of game_objects
+	//TODO: performance will increase if we implement sorting every few frames
+	static const int MAX_GAME_OBJS = 50;
+	game_object* game_objs[MAX_GAME_OBJS];
+	uint8_t slots[MAX_GAME_OBJS];
+	int next_obj_id = 1;
 };
 
 }

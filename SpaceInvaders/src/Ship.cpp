@@ -3,12 +3,12 @@
 namespace space_invaders
 {
 
-ship::ship()
+ship::ship(int x, int y, int w, int h)
 {
-}
-
-void ship::render(render_engine* renderer)
-{
+	pos_x = x;
+	pos_y = y;
+	width = w;
+	height = h;
 }
 
 }
