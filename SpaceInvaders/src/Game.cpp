@@ -12,6 +12,7 @@ game::game()
 	//active_scene = menu;
 
 	renderer = new render_engine();
+	input_manager::init();
 }
 
 void game::update()

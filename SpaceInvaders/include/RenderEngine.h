@@ -11,7 +11,6 @@ namespace space_invaders
 //some enums to somewhat hide direct access of library from game objects
 enum shape
 {
-	NONE,
 	TRIANGLE,
 	SQUARE,
 	CIRCLE,

@@ -7,7 +7,7 @@
 namespace space_invaders
 {
 
-class ship : game_object
+class ship : public game_object
 {
 public:
 	ship();

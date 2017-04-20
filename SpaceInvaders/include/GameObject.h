@@ -6,7 +6,7 @@
 namespace space_invaders
 {
 
-class scene;//not elegent, but it works for this small project
+class scene;
 
 enum game_object_event{
 	CREATE_BULLET,
@@ -26,6 +26,8 @@ public:
 	//accessors
 	int get_pos_x();
 	int get_pos_y();
+	int get_width();
+	int get_height();
 	uint8_t get_id();
 
 protected:
@@ -34,9 +36,13 @@ protected:
 	scene* owner_scene;
 
 	//position backing
-	uint8_t id; //must be constructed with an id
 	int pos_x;
 	int pos_y;
+	int width;
+	int height;
+	shape model;
+	color texture;
+	uint8_t id; //must be constructed with an id
 };
 
 }

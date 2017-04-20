@@ -27,6 +27,10 @@ void scene::on_notify(game_object_event e)
 {
 	switch(e)
 	{
+		case CREATE_BULLET:
+			break;
+		case CREATE_ENEMY:
+			break;
 		default:
 			break;
 	}
