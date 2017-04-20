@@ -13,20 +13,28 @@ void scene::update_scene(input_engine* input)
 
 void scene::render_all(render_engine* renderer)
 {
-	//loop through the game objects and render them all
+	//loop through the game objects and rendder them all
 	for (uint16_t i = 0 ; i < MAX_GAME_OBJS; i++)
 	{
-		if (game_objs[i] != NULL)
+		if (game_objs[i]!=NULL)
 		{
-			renderer->render_game_object(game_objs[i]);
+			game_objs[i]->render(renderer);
 		}
 	}
 }
 
-//perhaps add a bool to indicate success?
-void scene::add_game_object(instantiable i)
+void scene::on_notify(game_object_event e)
 {
-	//search for the first empty slot
+	switch(e)
+	{
+		default:
+			break;
+	}
+}
+
+void scene::add_game_object(game_object* go)
+{
+	//search for the first empty slot and delete
 	uint8_t first_empty_idx = -1;
 	for (uint8_t i = 0; i< MAX_GAME_OBJS; i++)
 	{
@@ -37,29 +45,26 @@ void scene::add_game_object(instantiable i)
 		}
 	}
 
-	//try to create object using the next id, fill the slot, increment idx
+	//create object using the next id, fill the slot, increment idx
 	if (first_empty_idx != -1)
 	{
-		game_object* go = go_instantiator::create_new(i, this);
-		if(go)
-		{
-			game_objs[first_empty_idx] = go;
-			slots[first_empty_idx] = next_obj_id;
-			next_obj_id++;
-		}
+		game_objs[first_empty_idx] = go;
+		go->attach(this);
+		slots[first_empty_idx] = next_obj_id;
+		next_obj_id++;
 	}
 
 }
 
 void scene::delete_game_object(uint8_t id)
 {
-	//Arduino does not support c++ std::map, so best option is a linear search (until we implement object sorting by id)
+	//Arduino does not support c++ std::map, so best option is a linear search
 	for (int i = 0; i < MAX_GAME_OBJS; i++)
 	{
 		if (slots[i] == id)
 		{
 			delete game_objs[i];
-			game_objs[i] = 0; //protect against double delete
+			game_objs[i] = NULL;//TODO: do i need this? real brain fart rn
 			slots[i] = 0;
 		}
 	}

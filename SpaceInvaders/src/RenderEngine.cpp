@@ -1,5 +1,4 @@
 #include "../include/RenderEngine.h"
-#include "../include/GameObject.h"
 
 namespace space_invaders
 {
@@ -12,9 +11,7 @@ render_engine::render_engine()
 	if (!screen->begin(RA8875_800x480))
 	{
 		Serial.println("RA8875 Not Found!");
-		while(1){
-			delay(500);
-		}
+		while(1);
 	}
 
 	Serial.println("RA8875 driver board found.");
@@ -25,35 +22,25 @@ render_engine::render_engine()
 	screen->PWM1config(true, RA8875_PWM_CLK_DIV1024); //PWM for backlight
 	screen->PWM1out(255);
 
-	screen->fillScreen(RA8875_RED);
-
 	//TODO: do I need these two lines, can't find info on them
 	//seems like they might be for resistive touch, but everywhere
-	//i go, I see that they're enabled anyway.
+	//i go, I see that they're enabled anyway
 	pinMode(RA8875_INT, INPUT);
 	digitalWrite(RA8875_INT, HIGH);
 
 	screen->touchEnable(false); //no touch
 
-	Serial.print("Status : ");
+	Serial.println("Status : ");
 	Serial.println(screen->readStatus(), HEX);
-
-	reset_screen();
 }
 
 //wrapper to hide library functionality from game objects
 //NOTE: Bitmaps are too slow on arduino for a game, primitives are best
-void render_engine::render_game_object(game_object* go)
+void render_engine::render_shape(shape s, color c, int x, int y, int w, int h)
 {
 	//NOTE: no support for rotation/transformation
 	if (screen)
 	{
-		shape s = go->get_model();
-		color c = go->get_texture();
-		int x = go->get_pos_x();
-		int y = go->get_pos_y();
-		int w = go->get_width();
-		int h = go->get_height();
 		switch(s)
 		{
 			TRIANGLE:
@@ -89,7 +76,7 @@ void render_engine::reset_screen()
 {
 	if (screen)
 	{
-		screen->fillScreen(RA8875_RED);
+		screen->fillScreen(RA8875_BLACK);
 	}
 }
 

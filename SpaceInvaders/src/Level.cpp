@@ -5,8 +5,10 @@ namespace space_invaders
 
 level::level()
 {
-	//create the objects we need
-	add_game_object(SHIP);
+	//these MUST be initialized in every 'scene' derivative or risk seg faulting
+	game_objs[MAX_GAME_OBJS];
+	slots[MAX_GAME_OBJS];
+	next_obj_id = 1;
 }
 
 }
