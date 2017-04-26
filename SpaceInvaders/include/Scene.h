@@ -26,6 +26,11 @@ protected:
 
 	void add_game_object(game_object* go);
 	void delete_game_object(int id);
+private:
+	//physics helper functions for conenience/readability
+	void update_physics();
+	bool is_inside(int16_t x_check, int16_t y_check,
+		int16_t w, int16_t h, int16_t x_test, int16_t y_test);
 };
 
 }

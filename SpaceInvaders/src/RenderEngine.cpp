@@ -61,7 +61,10 @@ void render_engine::render_shape(shape s, color c, int x, int y, int w, int h)
 			}
 			case SQUARE:
 			{
-				screen->fillRect(x, y, w, h, c);
+				uint16_t x_c = x - (int16_t)(w/2);
+				uint16_t y_c = y - (int16_t)(h/2);
+
+				screen->fillRect(x_c, y_c, w, h, c);
 				//screen->drawRect(x, y, w, h, c);
 				break;
 			}

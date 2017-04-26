@@ -6,7 +6,7 @@ namespace space_invaders
 level::level()
 {
 	add_game_object((game_object*) new ship(60));
-	add_game_object((game_object*) new enemy (20));
+	add_game_object((game_object*) new enemy (100));
 }
 
 
