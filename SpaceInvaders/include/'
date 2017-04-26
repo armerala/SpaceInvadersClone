@@ -1,0 +1,21 @@
+#include "../include/Enemy.h"
+#include "../include/RenderEngine.h"
+
+namespace space_invaders
+{
+
+int enemy::speed = 10; //TODO: perhaps introduce enemy speed as a distribution rather than uniform for all enemies
+
+//initilaize basic attributes
+enemy::enemy()
+{
+	last_shot_time = millis();
+}
+
+//level can speed up the speed of enemies as it feels fit
+void enemy::change_speed(int delta_speed)
+{
+	speed += delta_speed;
+}
+
+}

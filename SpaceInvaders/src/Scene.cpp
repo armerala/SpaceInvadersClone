@@ -3,46 +3,41 @@
 namespace space_invaders
 {
 
-/*
-void scene::update_scene(input_engine* input)
+
+void scene::update_scene()
 {
 //loop through the game objects and call update on each of them
-
+for (int i = 0; i < MAX_GAME_OBJS; i++)
+{
+	if (slots[i]!=0)
+	{
+		game_objs[i]->update();
+	}
 }
-*/
+}
+
 
 void scene::render_all(render_engine* renderer)
 {
 	//loop through the game objects and rendder them all
-	for (uint16_t i = 0 ; i < MAX_GAME_OBJS; i++)
+	renderer->reset_screen();
+	for (int i = 0 ; i < MAX_GAME_OBJS; i++)
 	{
-		if (game_objs[i]!=NULL)
+		if (slots[i] != 0)
 		{
 			game_objs[i]->render(renderer);
 		}
 	}
-}
-
-void scene::on_notify(game_object_event e)
-{
-	switch(e)
-	{
-		case CREATE_BULLET:
-			break;
-		case CREATE_ENEMY:
-			break;
-		default:
-			break;
-	}
+	delay(60);
 }
 
 void scene::add_game_object(game_object* go)
 {
 	//search for the first empty slot and delete
-	uint8_t first_empty_idx = -1;
-	for (uint8_t i = 0; i< MAX_GAME_OBJS; i++)
+	int first_empty_idx = -1;
+	for (int i = 0; i< MAX_GAME_OBJS; i++)
 	{
-		if (slots[i] != 0)
+		if (slots[i] == 0)
 		{
 			first_empty_idx = i;
 			break;
@@ -53,14 +48,14 @@ void scene::add_game_object(game_object* go)
 	if (first_empty_idx != -1)
 	{
 		game_objs[first_empty_idx] = go;
-		go->attach(this);
+		go->attach(this, next_obj_id); 
 		slots[first_empty_idx] = next_obj_id;
 		next_obj_id++;
 	}
 
 }
 
-void scene::delete_game_object(uint8_t id)
+void scene::delete_game_object(int id)
 {
 	//Arduino does not support c++ std::map, so best option is a linear search
 	for (int i = 0; i < MAX_GAME_OBJS; i++)
@@ -68,7 +63,7 @@ void scene::delete_game_object(uint8_t id)
 		if (slots[i] == id)
 		{
 			delete game_objs[i];
-			game_objs[i] = NULL;//TODO: do i need this? real brain fart rn
+			game_objs[i] = 0;
 			slots[i] = 0;
 		}
 	}

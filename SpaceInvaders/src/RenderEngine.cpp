@@ -43,25 +43,26 @@ void render_engine::render_shape(shape s, color c, int x, int y, int w, int h)
 	{
 		switch(s)
 		{
-			TRIANGLE:
+			case TRIANGLE:
 			{
 				//calculate center/draw
-				uint16_t x_0 = x - (w/2);
-				uint16_t y_0 = y - (h/2);
+				int16_t x_0 = x;
+				int16_t y_0 = y;
 
-				uint16_t x_1 = x + (w/2);
-				uint16_t y_1 = y - (h/2);
+				int16_t x_1 = x + (int16_t)(w/2);
+				int16_t y_1 = y + (int16_t)(h/2);
 
-				uint16_t x_2 = x;
-				uint16_t y_2 = y + (h/2);
+				int16_t x_2 = x - (int16_t)(w/2);
+				int16_t y_2 = y + (int16_t)(h/2);
 
-				screen->drawTriangle(x_0, y_0, x_1, y_1, x_2, y_2, c);
 				screen->fillTriangle(x_0, y_0, x_1, y_1, x_2, y_2, c);
+				//screen->drawTriangle(x_0, y_0, x_1, y_1, x_2, y_2, c);
 				break;
 			}
-			SQUARE:
+			case SQUARE:
 			{
-				screen->drawRect(x, y, w, h, c);
+				screen->fillRect(x, y, w, h, c);
+				//screen->drawRect(x, y, w, h, c);
 				break;
 			}
 			default:
@@ -76,7 +77,7 @@ void render_engine::reset_screen()
 {
 	if (screen)
 	{
-		screen->fillScreen(RA8875_BLACK);
+		screen->fillScreen(RA8875_RED);
 	}
 }
 

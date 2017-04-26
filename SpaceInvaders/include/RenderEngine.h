@@ -4,6 +4,7 @@
 #include <Adafruit_RA8875.h>
 #include <Adafruit_GFX.h>
 #include <SPI.h>
+#include <Arduino.h>
 
 namespace space_invaders
 {
@@ -27,6 +28,7 @@ enum color
 	CYAN = RA8875_CYAN,
 };
 
+
 class render_engine
 {
 public:
@@ -44,8 +46,6 @@ private:
 	const int RA8875_INT = 3;
 	const int RA8875_CS = 10;
 	const int RA8875_RESET = 9;
-
-	const int PIXEL_BUF_SIZE = 20;
 
 	Adafruit_RA8875* screen;
 

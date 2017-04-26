@@ -4,6 +4,7 @@
 #include "RenderEngine.h"
 #include "InputManager.h"
 #include "Scene.h"
+#include "Level.h"
 
 namespace space_invaders
 {
