@@ -12,6 +12,7 @@ namespace space_invaders
 //some enums to somewhat hide direct access of library from game objects
 enum shape
 {
+	NOT_RENDERED,
 	TRIANGLE,
 	SQUARE,
 	CIRCLE,
@@ -36,6 +37,7 @@ public:
 	~render_engine();
 
 	void render_shape(shape s, color c, int x, int y, int w, int h);
+	void render_text(String msg, int16_t x, int16_t y);
 	void reset_screen();
 	
 private:

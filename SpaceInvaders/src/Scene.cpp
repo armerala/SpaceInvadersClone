@@ -19,6 +19,11 @@ void scene::update_scene()
 	update_physics();
 }
 
+uint8_t scene::get_game_state()
+{
+	return game_state;
+}
+
 void scene::update_physics()
 {
 	//update physics now 
@@ -26,7 +31,7 @@ void scene::update_physics()
 	//TODO: either frame-fix the game or do something, but this eats our micro-processor for breakfast
 	//Perhaps a rough cull before checking might be faster? also perhaps fewer get calls if we can avoid it
 	//worst part is we can't even use threading on arduino
-	for (int i = 0; i< MAX_GAME_OBJS; i++)
+	for (uint16_t i = 0; i< MAX_GAME_OBJS; i++)
 	{
 		if (slots[i] != 0)
 		{
@@ -98,6 +103,9 @@ void scene::render_all(render_engine* renderer)
 			game_objs[i]->render(renderer);
 		}
 	}
+	
+	draw_gui(renderer);
+
 	delay(60);
 }
 

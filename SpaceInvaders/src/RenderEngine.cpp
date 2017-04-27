@@ -80,8 +80,24 @@ void render_engine::reset_screen()
 {
 	if (screen)
 	{
-		screen->fillScreen(RA8875_RED);
+		screen->fillScreen(BLACK);
 	}
+}
+
+void render_engine::render_text(String msg, int16_t x, int16_t y)
+{
+	//convert string to char* then write to screen
+	char charBuf[msg.length() + 1];
+	msg.toCharArray(charBuf, msg.length()+1);
+
+	screen->textMode();
+
+	screen->textColor(WHITE, BLACK);
+	screen->textSetCursor(x, y);
+	screen->textWrite(charBuf, msg.length()+1);
+
+	screen->graphicsMode();
+
 }
 
 render_engine::~render_engine()

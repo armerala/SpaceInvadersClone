@@ -10,6 +10,7 @@ namespace space_invaders
 class scene;
 
 enum game_object_tag{
+	SPAWNER,
 	ENEMY,
 	SHIP,
 	BULLET,
@@ -20,6 +21,7 @@ enum game_object_event{
 	CREATE_ENEMY,
 	OBJECT_DEATH,
 	POINTS_SCORED,
+	POINTS_LOST,
 };
 
 class game_object

@@ -21,14 +21,11 @@ public:
 
 private:
 	unsigned long last_shot_time;
-	static int shot_delay_millis;
+	static int shot_delay;
 
 protected:
 	static float speed;
-	const int height = 100;
-	const int width = 100;
-	const shape model = SQUARE;
-	const color texture = BLUE;
+	void on_collide(game_object* collider);
 
 };
 

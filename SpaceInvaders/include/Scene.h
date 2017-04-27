@@ -6,6 +6,7 @@
 #include "Ship.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "EnemySpawner.h"
 
 namespace space_invaders
 {
@@ -18,14 +19,21 @@ public:
 	void update_scene();
 	void render_all(render_engine* renderer);
 
+	uint8_t get_game_state();
+
 protected:
-	const static int MAX_GAME_OBJS = 50;
+	virtual void draw_gui(render_engine* renderer) = 0;//pooor style, i'm sorry
+
+	//slotting game_objects
+	const static int MAX_GAME_OBJS = 100;
 	game_object* game_objs[MAX_GAME_OBJS] = {0};
 	int slots[MAX_GAME_OBJS] = {0};
 	int next_obj_id = 1;
 
 	void add_game_object(game_object* go);
 	void delete_game_object(int id);
+
+	uint8_t game_state = 1; //1 means running, 0 means finished
 private:
 	//physics helper functions for conenience/readability
 	void update_physics();

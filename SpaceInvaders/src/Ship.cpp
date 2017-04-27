@@ -39,12 +39,6 @@ void ship::update()
 		notify_scene(CREATE_BULLET);
 		last_shot_time = millis();
 	}
-
-	if (shot_delay > shot_delay_millis)
-	{
-		notify_scene(CREATE_BULLET);
-		last_shot_time = millis();
-	}
 }
 
 void ship::on_collide(game_object* collider)
